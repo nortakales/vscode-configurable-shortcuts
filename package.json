@@ -1,0 +1,84 @@
+{
+  "name": "vscode-configurable-shortcuts",
+  "displayName": "VSCode Configurable Shortcuts",
+  "description": "Various opt-in shortcuts for VSCode",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.53.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration":{
+      "title": "Configurable Shortcuts",
+      "properties": {
+        "configurable-shortcuts.toggleTerminal": {
+          "title": "Toggle Terminal",
+          "type": "string",
+          "default": "Hide",
+          "enum":[
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar",
+            "Status Bar: Left + Editor Bar",
+            "Status Bar: Right + Editor Bar"
+          ]
+
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "configurable-shortcuts.toggleTerminal",
+        "title": "Open Terminal",
+        "icon": "$(terminal)"
+      },
+      {
+        "command": "extension.openDevTools",
+        "title": "Open Dev Tools",
+        "icon": "$(circuit-board)"
+      }
+    ],
+    "menus": {
+			"editor/title": [
+				{
+					"command": "configurable-shortcuts.toggleTerminal",
+					"group": "navigation",
+          "when": "config.configurable-shortcuts.toggleTerminal == Editor Bar || config.configurable-shortcuts.toggleTerminal == Status Bar: Left + Editor Bar || config.configurable-shortcuts.toggleTerminal == Status Bar: Right + Editor Bar"
+				},
+				{
+					"command": "extension.openDevTools",
+					"group": "navigation"
+          
+				}
+			]
+		}
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.4",
+    "@types/node": "^12.11.7",
+    "@types/vscode": "^1.53.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "eslint": "^7.19.0",
+    "glob": "^7.1.6",
+    "mocha": "^8.2.1",
+    "typescript": "^4.1.3",
+    "vscode-test": "^1.5.0"
+  }
+}
