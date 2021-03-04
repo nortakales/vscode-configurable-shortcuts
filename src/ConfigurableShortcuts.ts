@@ -7,7 +7,7 @@ class ConfigurableShortcuts {
     }
 
     getConfiguration(): vscode.WorkspaceConfiguration {
-        return vscode.workspace.getConfiguration("configurable-shortcuts");
+        return vscode.workspace.getConfiguration("shortcut");
     }
 
     init(context: vscode.ExtensionContext) {
@@ -16,52 +16,93 @@ class ConfigurableShortcuts {
         this.updateView();
     }
 
-    private terminalItem!: Pair<vscode.StatusBarItem>;
-    private terminalItemLeft!: vscode.StatusBarItem;
-    private terminalItemRight!: vscode.StatusBarItem;
-    private outputItem!: vscode.StatusBarItem;
-    private debugOutputItem!: vscode.StatusBarItem;
-    private panelItem!: vscode.StatusBarItem;
+    private panelItem!: Pair<vscode.StatusBarItem>;
+    private outputItem!: Pair<vscode.StatusBarItem>; // not true toggle
+    private debugConsoleItem!: Pair<vscode.StatusBarItem>; // not true toggle
+    private terminalItem!: Pair<vscode.StatusBarItem>; // not true toggle
+
+    private devToolsItem!: Pair<vscode.StatusBarItem>;
+
+    private formatItem!: Pair<vscode.StatusBarItem>;
 
     private createStatusBarIcons(context: vscode.ExtensionContext) {
+
+        this.panelItem = this.createStatusBarItemPair(
+            context,
+            1,
+            "shortcut.togglePanel",
+            `$(window)`,
+            "Toggle Panel");
+
+        this.outputItem = this.createStatusBarItemPair(
+            context,
+            1,
+            "shortcut.toggleOutput",
+            `$(output)`,
+            "Toggle Output");
+
+        this.debugConsoleItem = this.createStatusBarItemPair(
+            context,
+            1,
+            "shortcut.toggleDebugConsole",
+            `$(debug-console)`,
+            "Toggle Debug Console");
 
         this.terminalItem = this.createStatusBarItemPair(
             context,
             1,
-            "workbench.action.terminal.focus",
+            "shortcut.toggleTerminal",
             `$(terminal)`,
-            "Show Terminal"
+            "Toggle Terminal"
         );
 
-        this.outputItem = this.createStatusBarItem(context,
-            vscode.StatusBarAlignment.Left,
+        this.devToolsItem = this.createStatusBarItemPair(
+            context,
             1,
-            "workbench.action.output.toggleOutput",
-            `$(output)`,
-            "Toggle Output Panel");
-
-        this.debugOutputItem = this.createStatusBarItem(context,
-            vscode.StatusBarAlignment.Left,
+            "shortcut.toggleDevTools",
+            `$(circuit-board)`,
+            "Toggle Dev Tools"
+        );
+        
+        this.formatItem = this.createStatusBarItemPair(
+            context,
             1,
-            "workbench.debug.action.toggleRepl",
-            `$(debug-console)`,
-            "Toggle Debug Output Panel");
-
-        this.panelItem = this.createStatusBarItem(context,
-            vscode.StatusBarAlignment.Left,
-            1,
-            "workbench.action.togglePanel",
-            `$(window)`,
-            "Toggle Panel");
+            "shortcut.format",
+            `$(json)`,
+            "Format File"
+        );
     }
 
     private registerCommands(context: vscode.ExtensionContext) {
-        this.registerCommand(context, "configurable-shortcuts.toggleTerminal", "workbench.action.terminal.focus");
+        this.registerCommand(context, "shortcut.togglePanel", "workbench.action.togglePanel");
+        this.registerCommand(context, "shortcut.toggleOutput", "workbench.action.output.toggleOutput");
+        this.registerCommand(context, "shortcut.toggleDebugConsole", "workbench.debug.action.toggleRepl");
+        this.registerCommand(context, "shortcut.toggleTerminal", "workbench.action.terminal.toggleTerminal");
+
+        this.registerCommand(context, "shortcut.toggleDevTools", "workbench.action.toggleDevTools");
+        
+        this.registerCommand(context, "shortcut.format", "editor.action.formatDocument");
+
+        
     }
 
     updateView() {
-        this.updateStatusBarItemPair("toggleTerminal", this.terminalItem);
+        this.updateStatusBarItemPair("togglePanel", this.panelItem);
+        this.updateStatusBarItemPair("toggleOutput", this.outputItem); // not true toggle in status bar
+        this.updateStatusBarItemPair("toggleDebugConsole", this.debugConsoleItem); // not true toggle in status bar
+        this.updateStatusBarItemPair("toggleTerminal", this.terminalItem); // not true toggle in status bar
+        
+        this.updateStatusBarItemPair("toggleDevTools", this.devToolsItem);
+        
+        this.updateStatusBarItemPair("format", this.formatItem);
     }
+
+    // testing
+    private toggleTerminalFunction = function() {
+        "workbench.action.terminal.focus"
+    }
+
+    
 
     private updateStatusBarItemPair(configKey: string, pair: Pair<vscode.StatusBarItem>) {
         this.updateStatusBarItem(configKey, pair.left);
@@ -71,9 +112,9 @@ class ConfigurableShortcuts {
     private updateStatusBarItem(configKey: string, statusBarItem: vscode.StatusBarItem) {
         const configValue: string = this.getConfiguration().get(configKey, "Hide");
 
-        if(configValue.startsWith("Status Bar: Left") && statusBarItem.alignment == vscode.StatusBarAlignment.Left) {
+        if (configValue.startsWith("Status Bar: Left") && statusBarItem.alignment == vscode.StatusBarAlignment.Left) {
             statusBarItem.show();
-        } else if(configValue.startsWith("Status Bar: Right") && statusBarItem.alignment == vscode.StatusBarAlignment.Right) {
+        } else if (configValue.startsWith("Status Bar: Right") && statusBarItem.alignment == vscode.StatusBarAlignment.Right) {
             statusBarItem.show();
         } else {
             statusBarItem.hide();
@@ -83,15 +124,22 @@ class ConfigurableShortcuts {
     private registerCommand(
         context: vscode.ExtensionContext,
         commandName: string,
-        commandToExecute: string
+        command: string | ((...args: any[]) => any)
     ) {
-        const command = vscode.commands.registerCommand(commandName,
-            () => {
-                vscode.commands.executeCommand(commandToExecute);
-            }
-        );
 
-        context.subscriptions.push(command);
+        let commandToExecute: ((...args: any[]) => any);
+        if(typeof command == "string") {
+            commandToExecute = () => {
+                vscode.window.showWarningMessage(command);
+                vscode.commands.executeCommand(command);
+            }
+        } else {
+            commandToExecute = command;
+        }
+
+        const disposable = vscode.commands.registerCommand(commandName, commandToExecute);
+
+        context.subscriptions.push(disposable);
     }
 
     private createStatusBarItemPair(
@@ -100,23 +148,23 @@ class ConfigurableShortcuts {
         command: string,
         label: string,
         tooltip: string): Pair<vscode.StatusBarItem> {
-            return {
-                left: this.createStatusBarItem(
-                    context,
-                    vscode.StatusBarAlignment.Left,
-                    priority,
-                    command,
-                    label,
-                    tooltip),
-                right: this.createStatusBarItem(
-                    context,
-                    vscode.StatusBarAlignment.Right,
-                    priority,
-                    command,
-                    label,
-                    tooltip)
-            };
-        }
+        return {
+            left: this.createStatusBarItem(
+                context,
+                vscode.StatusBarAlignment.Left,
+                priority,
+                command,
+                label,
+                tooltip),
+            right: this.createStatusBarItem(
+                context,
+                vscode.StatusBarAlignment.Right,
+                priority,
+                command,
+                label,
+                tooltip)
+        };
+    }
 
     private createStatusBarItem(
         context: vscode.ExtensionContext,

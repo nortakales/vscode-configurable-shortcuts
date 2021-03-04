@@ -2,6 +2,7 @@
   "name": "vscode-configurable-shortcuts",
   "displayName": "VSCode Configurable Shortcuts",
   "description": "Various opt-in shortcuts for VSCode",
+  "publisher": "nortakales",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.53.0"
@@ -14,14 +15,14 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "configuration":{
+    "configuration": {
       "title": "Configurable Shortcuts",
       "properties": {
-        "configurable-shortcuts.toggleTerminal": {
-          "title": "Toggle Terminal",
+        "shortcut.togglePanel": {
+          "title": "Toggle Panel",
           "type": "string",
           "default": "Hide",
-          "enum":[
+          "enum": [
             "Hide",
             "Status Bar: Left",
             "Status Bar: Right",
@@ -29,44 +30,136 @@
             "Status Bar: Left + Editor Bar",
             "Status Bar: Right + Editor Bar"
           ]
-
+        },
+        "shortcut.toggleOutput": {
+          "title": "Toggle Output",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar",
+            "Status Bar: Left + Editor Bar",
+            "Status Bar: Right + Editor Bar"
+          ]
+        },
+        "shortcut.toggleDebugConsole": {
+          "title": "Toggle Debug Console",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar",
+            "Status Bar: Left + Editor Bar",
+            "Status Bar: Right + Editor Bar"
+          ]
+        },
+        "shortcut.toggleTerminal": {
+          "title": "Toggle Terminal",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar",
+            "Status Bar: Left + Editor Bar",
+            "Status Bar: Right + Editor Bar"
+          ]
+        },
+        "shortcut.toggleDevTools": {
+          "title": "Toggle Dev Tools",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar",
+            "Status Bar: Left + Editor Bar",
+            "Status Bar: Right + Editor Bar"
+          ]
+        },
+        "shortcut.format": {
+          "title": "Format File",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar",
+            "Status Bar: Left + Editor Bar",
+            "Status Bar: Right + Editor Bar"
+          ]
         }
       }
     },
     "commands": [
       {
-        "command": "configurable-shortcuts.toggleTerminal",
-        "title": "Open Terminal",
+        "command": "shortcut.togglePanel",
+        "title": "Toggle Panel",
+        "icon": "$(window)"
+      },
+      {
+        "command": "shortcut.toggleOutput",
+        "title": "Toggle Output",
+        "icon": "$(output)"
+      },
+      {
+        "command": "shortcut.toggleDebugConsole",
+        "title": "Toggle Debug Console",
+        "icon": "$(debug-console)"
+      },
+      {
+        "command": "shortcut.toggleTerminal",
+        "title": "Toggle Terminal",
         "icon": "$(terminal)"
       },
       {
-        "command": "extension.openDevTools",
-        "title": "Open Dev Tools",
+        "command": "shortcut.toggleDevTools",
+        "title": "Toggle Dev Tools",
         "icon": "$(circuit-board)"
       }
     ],
     "menus": {
-			"editor/title": [
-				{
-					"command": "configurable-shortcuts.toggleTerminal",
-					"group": "navigation",
-          "when": "config.configurable-shortcuts.toggleTerminal == Editor Bar || config.configurable-shortcuts.toggleTerminal == Status Bar: Left + Editor Bar || config.configurable-shortcuts.toggleTerminal == Status Bar: Right + Editor Bar"
-				},
-				{
-					"command": "extension.openDevTools",
-					"group": "navigation"
-          
-				}
-			]
-		}
+      "editor/title": [
+        {
+          "command": "shortcut.togglePanel",
+          "group": "navigation",
+          "when": "config.shortcut.togglePanel == Editor Bar || config.shortcut.togglePanel == Status Bar: Left + Editor Bar || config.shortcut.togglePanel == Status Bar: Right + Editor Bar"
+        },
+        {
+          "command": "shortcut.toggleOutput",
+          "group": "navigation",
+          "when": "config.shortcut.toggleOutput == Editor Bar || config.shortcut.toggleOutput == Status Bar: Left + Editor Bar || config.shortcut.toggleOutput == Status Bar: Right + Editor Bar"
+        },
+        {
+          "command": "shortcut.toggleDebugConsole",
+          "group": "navigation",
+          "when": "config.shortcut.toggleDebugConsole == Editor Bar || config.shortcut.toggleDebugConsole == Status Bar: Left + Editor Bar || config.shortcut.toggleDebugConsole == Status Bar: Right + Editor Bar"
+        },
+        {
+          "command": "shortcut.toggleTerminal",
+          "group": "navigation",
+          "when": "config.shortcut.toggleTerminal == Editor Bar || config.shortcut.toggleTerminal == Status Bar: Left + Editor Bar || config.shortcut.toggleTerminal == Status Bar: Right + Editor Bar"
+        },
+        {
+          "command": "shortcut.toggleDevTools",
+          "group": "navigation",
+          "when": "config.shortcut.toggleDevTools == Editor Bar || config.shortcut.toggleDevTools == Status Bar: Left + Editor Bar || config.shortcut.toggleDevTools == Status Bar: Right + Editor Bar"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "lint": "eslint src --ext ts"
   },
   "devDependencies": {
     "@types/glob": "^7.1.3",
