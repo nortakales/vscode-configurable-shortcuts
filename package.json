@@ -3,7 +3,7 @@
   "displayName": "VSCode Configurable Shortcuts",
   "description": "Various opt-in shortcuts for VSCode",
   "publisher": "nortakales",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.53.0"
   },
@@ -26,9 +26,7 @@
             "Hide",
             "Status Bar: Left",
             "Status Bar: Right",
-            "Editor Bar",
-            "Status Bar: Left + Editor Bar",
-            "Status Bar: Right + Editor Bar"
+            "Editor Bar"
           ]
         },
         "shortcut.toggleOutput": {
@@ -39,9 +37,7 @@
             "Hide",
             "Status Bar: Left",
             "Status Bar: Right",
-            "Editor Bar",
-            "Status Bar: Left + Editor Bar",
-            "Status Bar: Right + Editor Bar"
+            "Editor Bar"
           ]
         },
         "shortcut.toggleDebugConsole": {
@@ -52,9 +48,7 @@
             "Hide",
             "Status Bar: Left",
             "Status Bar: Right",
-            "Editor Bar",
-            "Status Bar: Left + Editor Bar",
-            "Status Bar: Right + Editor Bar"
+            "Editor Bar"
           ]
         },
         "shortcut.toggleTerminal": {
@@ -65,9 +59,7 @@
             "Hide",
             "Status Bar: Left",
             "Status Bar: Right",
-            "Editor Bar",
-            "Status Bar: Left + Editor Bar",
-            "Status Bar: Right + Editor Bar"
+            "Editor Bar"
           ]
         },
         "shortcut.toggleDevTools": {
@@ -78,9 +70,7 @@
             "Hide",
             "Status Bar: Left",
             "Status Bar: Right",
-            "Editor Bar",
-            "Status Bar: Left + Editor Bar",
-            "Status Bar: Right + Editor Bar"
+            "Editor Bar"
           ]
         },
         "shortcut.format": {
@@ -91,9 +81,150 @@
             "Hide",
             "Status Bar: Left",
             "Status Bar: Right",
-            "Editor Bar",
-            "Status Bar: Left + Editor Bar",
-            "Status Bar: Right + Editor Bar"
+            "Editor Bar"
+          ]
+        },
+        "shortcut.toggleWordWrap": {
+          "title": "Toggle Word Wrap",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar"
+          ]
+        },
+        "shortcut.toggleWhitespaceCharacters": {
+          "title": "Toggle Whitespace Characters",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar"
+          ]
+        },
+        "shortcut.save": {
+          "title": "Save",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar"
+          ]
+        },
+        "shortcut.saveAll": {
+          "title": "Save All",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar"
+          ]
+        },
+        "shortcut.back": {
+          "title": "Back",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar"
+          ]
+        },
+        "shortcut.forward": {
+          "title": "Forward",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar"
+          ]
+        },
+        "shortcut.undo": {
+          "title": "Undo",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar"
+          ]
+        },
+        "shortcut.redo": {
+          "title": "Redo",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar"
+          ]
+        },
+        "shortcut.splitEditorDown": {
+          "title": "Split Editor Down",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar"
+          ]
+        },
+        "shortcut.addCursorsToLineEnds": {
+          "title": "Add Cursors To Line Ends",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar"
+          ]
+        },
+        "shortcut.toggleColumnSelectionMode": {
+          "title": "Toggle Column Selection Mode",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar"
+          ]
+        },
+        "shortcut.run": {
+          "title": "Run",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar"
+          ]
+        },
+        "shortcut.runWithDebug": {
+          "title": "Run With Debug",
+          "type": "string",
+          "default": "Hide",
+          "enum": [
+            "Hide",
+            "Status Bar: Left",
+            "Status Bar: Right",
+            "Editor Bar"
           ]
         }
       }
@@ -123,6 +254,76 @@
         "command": "shortcut.toggleDevTools",
         "title": "Toggle Dev Tools",
         "icon": "$(circuit-board)"
+      },
+      {
+        "command": "shortcut.format",
+        "title": "Format File",
+        "icon": "$(json)"
+      },
+      {
+        "command": "shortcut.toggleWordWrap",
+        "title": "Toggle Word Wrap",
+        "icon": "$(word-wrap)"
+      },
+      {
+        "command": "shortcut.toggleWhitespaceCharacters",
+        "title": "Toggle Whitespace Characters",
+        "icon": "$(whitespace)"
+      },
+      {
+        "command": "shortcut.save",
+        "title": "Save",
+        "icon": "$(save)"
+      },
+      {
+        "command": "shortcut.saveAll",
+        "title": "Save All",
+        "icon": "$(save-all)"
+      },
+      {
+        "command": "shortcut.back",
+        "title": "Back",
+        "icon": "$(chevron-left)"
+      },
+      {
+        "command": "shortcut.forward",
+        "title": "Forward",
+        "icon": "$(chevron-right)"
+      },
+      {
+        "command": "shortcut.undo",
+        "title": "Undo",
+        "icon": "$(discard)"
+      },
+      {
+        "command": "shortcut.redo",
+        "title": "Redo",
+        "icon": "$(redo)"
+      },
+      {
+        "command": "shortcut.splitEditorDown",
+        "title": "Split Editor Down",
+        "icon": "$(split-vertical)"
+      },
+      {
+        "command": "shortcut.addCursorsToLineEnds",
+        "title": "Add Cursors To Line Ends",
+        "icon": "$(export)"
+      },
+      {
+        "command": "shortcut.toggleColumnSelectionMode",
+        "title": "Toggle Column Selection Mode",
+        "icon": "$(move)"
+      },
+      {
+        "command": "shortcut.run",
+        "title": "Run",
+        "icon": "$(play)"
+      },
+      {
+        "command": "shortcut.runWithDebug",
+        "title": "Run With Debug",
+        "icon": "$(debug-alt)"
       }
     ],
     "menus": {
@@ -130,27 +331,97 @@
         {
           "command": "shortcut.togglePanel",
           "group": "navigation",
-          "when": "config.shortcut.togglePanel == Editor Bar || config.shortcut.togglePanel == Status Bar: Left + Editor Bar || config.shortcut.togglePanel == Status Bar: Right + Editor Bar"
+          "when": "config.shortcut.togglePanel == Editor Bar"
         },
         {
           "command": "shortcut.toggleOutput",
           "group": "navigation",
-          "when": "config.shortcut.toggleOutput == Editor Bar || config.shortcut.toggleOutput == Status Bar: Left + Editor Bar || config.shortcut.toggleOutput == Status Bar: Right + Editor Bar"
+          "when": "config.shortcut.toggleOutput == Editor Bar"
         },
         {
           "command": "shortcut.toggleDebugConsole",
           "group": "navigation",
-          "when": "config.shortcut.toggleDebugConsole == Editor Bar || config.shortcut.toggleDebugConsole == Status Bar: Left + Editor Bar || config.shortcut.toggleDebugConsole == Status Bar: Right + Editor Bar"
+          "when": "config.shortcut.toggleDebugConsole == Editor Bar"
         },
         {
           "command": "shortcut.toggleTerminal",
           "group": "navigation",
-          "when": "config.shortcut.toggleTerminal == Editor Bar || config.shortcut.toggleTerminal == Status Bar: Left + Editor Bar || config.shortcut.toggleTerminal == Status Bar: Right + Editor Bar"
+          "when": "config.shortcut.toggleTerminal == Editor Bar"
         },
         {
           "command": "shortcut.toggleDevTools",
           "group": "navigation",
-          "when": "config.shortcut.toggleDevTools == Editor Bar || config.shortcut.toggleDevTools == Status Bar: Left + Editor Bar || config.shortcut.toggleDevTools == Status Bar: Right + Editor Bar"
+          "when": "config.shortcut.toggleDevTools == Editor Bar"
+        },
+        {
+          "command": "shortcut.format",
+          "group": "navigation",
+          "when": "config.shortcut.format == Editor Bar"
+        },
+        {
+          "command": "shortcut.toggleWordWrap",
+          "group": "navigation",
+          "when": "config.shortcut.toggleWordWrap == Editor Bar"
+        },
+        {
+          "command": "shortcut.toggleWhitespaceCharacters",
+          "group": "navigation",
+          "when": "config.shortcut.toggleWhitespaceCharacters == Editor Bar"
+        },
+        {
+          "command": "shortcut.save",
+          "group": "navigation",
+          "when": "config.shortcut.save == Editor Bar"
+        },
+        {
+          "command": "shortcut.saveAll",
+          "group": "navigation",
+          "when": "config.shortcut.saveAll == Editor Bar"
+        },
+        {
+          "command": "shortcut.back",
+          "group": "navigation",
+          "when": "config.shortcut.back == Editor Bar"
+        },
+        {
+          "command": "shortcut.forward",
+          "group": "navigation",
+          "when": "config.shortcut.forward == Editor Bar"
+        },
+        {
+          "command": "shortcut.undo",
+          "group": "navigation",
+          "when": "config.shortcut.undo == Editor Bar"
+        },
+        {
+          "command": "shortcut.redo",
+          "group": "navigation",
+          "when": "config.shortcut.redo == Editor Bar"
+        },
+        {
+          "command": "shortcut.splitEditorDown",
+          "group": "navigation",
+          "when": "config.shortcut.splitEditorDown == Editor Bar"
+        },
+        {
+          "command": "shortcut.addCursorsToLineEnds",
+          "group": "navigation",
+          "when": "config.shortcut.addCursorsToLineEnds == Editor Bar"
+        },
+        {
+          "command": "shortcut.toggleColumnSelectionMode",
+          "group": "navigation",
+          "when": "config.shortcut.toggleColumnSelectionMode == Editor Bar"
+        },
+        {
+          "command": "shortcut.run",
+          "group": "navigation",
+          "when": "config.shortcut.run == Editor Bar"
+        },
+        {
+          "command": "shortcut.runWithDebug",
+          "group": "navigation",
+          "when": "config.shortcut.runWithDebug == Editor Bar"
         }
       ]
     }

@@ -17,13 +17,32 @@ class ConfigurableShortcuts {
     }
 
     private panelItem!: Pair<vscode.StatusBarItem>;
-    private outputItem!: Pair<vscode.StatusBarItem>; // not true toggle
+    private outputItem!: Pair<vscode.StatusBarItem>; // not true toggle when in status bar only
     private debugConsoleItem!: Pair<vscode.StatusBarItem>; // not true toggle
     private terminalItem!: Pair<vscode.StatusBarItem>; // not true toggle
 
     private devToolsItem!: Pair<vscode.StatusBarItem>;
 
     private formatItem!: Pair<vscode.StatusBarItem>;
+    private wordWrapItem!: Pair<vscode.StatusBarItem>;
+    private toggleWhitespaceCharactersItem!: Pair<vscode.StatusBarItem>;
+
+    private saveItem!: Pair<vscode.StatusBarItem>;
+    private saveAllItem!: Pair<vscode.StatusBarItem>;
+
+    private backItem!: Pair<vscode.StatusBarItem>;
+    private forwardItem!: Pair<vscode.StatusBarItem>;
+    
+    private undoItem!: Pair<vscode.StatusBarItem>;
+    private redoItem!: Pair<vscode.StatusBarItem>;
+
+    private splitEditorDownItem!: Pair<vscode.StatusBarItem>;
+
+    private addCursorsToLineEndsItem!: Pair<vscode.StatusBarItem>;
+    private toggleColumnSelectionModeItem!: Pair<vscode.StatusBarItem>;
+
+    private runItem!: Pair<vscode.StatusBarItem>;
+    private runWithDebugItem!: Pair<vscode.StatusBarItem>;
 
     private createStatusBarIcons(context: vscode.ExtensionContext) {
 
@@ -71,6 +90,110 @@ class ConfigurableShortcuts {
             `$(json)`,
             "Format File"
         );
+
+        this.wordWrapItem = this.createStatusBarItemPair(
+            context,
+            1,
+            "shortcut.toggleWordWrap",
+            `$(word-wrap)`,
+            "Toggle Word Wrap"
+        );
+
+        this.toggleWhitespaceCharactersItem = this.createStatusBarItemPair(
+            context,
+            1,
+            "shortcut.toggleWhitespaceCharacters",
+            `$(whitespace)`,
+            "Toggle Whitespace Characters"
+        );
+
+        this.saveItem = this.createStatusBarItemPair(
+            context,
+            1,
+            "shortcut.save",
+            `$(save)`,
+            "Save"
+        );
+        
+        this.saveAllItem = this.createStatusBarItemPair(
+            context,
+            1,
+            "shortcut.saveAll",
+            `$(save-all)`,
+            "Save All"
+        );
+
+        this.backItem = this.createStatusBarItemPair(
+            context,
+            1,
+            "shortcut.back",
+            `$(chevron-left)`,
+            "Back"
+        );
+        
+        this.forwardItem = this.createStatusBarItemPair(
+            context,
+            1,
+            "shortcut.forward",
+            `$(chevron-right)`,
+            "Forward"
+        );
+        
+        this.undoItem = this.createStatusBarItemPair(
+            context,
+            1,
+            "shortcut.undo",
+            `$(discard)`,
+            "Undo"
+        );
+        
+        this.redoItem = this.createStatusBarItemPair(
+            context,
+            1,
+            "shortcut.redo",
+            `$(redo)`,
+            "Redo"
+        );
+        
+        this.splitEditorDownItem = this.createStatusBarItemPair(
+            context,
+            1,
+            "shortcut.splitEditorDown",
+            `$(split-vertical)`,
+            "Split Editor Down"
+        );
+
+        this.addCursorsToLineEndsItem = this.createStatusBarItemPair(
+            context,
+            1,
+            "shortcut.addCursorsToLineEnds",
+            `$(export)`,
+            "Add Cursors To Line Ends"
+        );
+        
+        this.toggleColumnSelectionModeItem = this.createStatusBarItemPair(
+            context,
+            1,
+            "shortcut.toggleColumnSelectionMode",
+            `$(move)`,
+            "Toggle Column Selection Mode"
+        );
+
+        this.runItem = this.createStatusBarItemPair(
+            context,
+            1,
+            "shortcut.run",
+            `$(play)`,
+            "Run"
+        );
+
+        this.runWithDebugItem = this.createStatusBarItemPair(
+            context,
+            1,
+            "shortcut.runWithDebug",
+            `$(debug-alt)`,
+            "Run With Debug"
+        );
     }
 
     private registerCommands(context: vscode.ExtensionContext) {
@@ -82,8 +205,25 @@ class ConfigurableShortcuts {
         this.registerCommand(context, "shortcut.toggleDevTools", "workbench.action.toggleDevTools");
         
         this.registerCommand(context, "shortcut.format", "editor.action.formatDocument");
-
+        this.registerCommand(context, "shortcut.toggleWordWrap", "editor.action.toggleWordWrap");
+        this.registerCommand(context, "shortcut.toggleWhitespaceCharacters", "editor.action.toggleRenderWhitespace");
         
+        this.registerCommand(context, "shortcut.save", "workbench.action.files.save");
+        this.registerCommand(context, "shortcut.saveAll", "workbench.action.files.saveAll");
+        
+        this.registerCommand(context, "shortcut.back", "workbench.action.navigateBack");
+        this.registerCommand(context, "shortcut.forward", "workbench.action.navigateForward");
+        
+        this.registerCommand(context, "shortcut.undo", "undo");
+        this.registerCommand(context, "shortcut.redo", "redo");
+
+        this.registerCommand(context, "shortcut.splitEditorDown", "workbench.action.splitEditorDown");
+        
+        this.registerCommand(context, "shortcut.addCursorsToLineEnds", "editor.action.insertCursorAtEndOfEachLineSelected");
+        this.registerCommand(context, "shortcut.toggleColumnSelectionMode", "editor.action.toggleColumnSelection");
+        
+        this.registerCommand(context, "shortcut.run", "workbench.action.debug.run");
+        this.registerCommand(context, "shortcut.runWithDebug", "workbench.action.debug.start");
     }
 
     updateView() {
@@ -95,7 +235,27 @@ class ConfigurableShortcuts {
         this.updateStatusBarItemPair("toggleDevTools", this.devToolsItem);
         
         this.updateStatusBarItemPair("format", this.formatItem);
+        this.updateStatusBarItemPair("toggleWordWrap", this.wordWrapItem);
+        this.updateStatusBarItemPair("toggleWhitespaceCharacters", this.toggleWhitespaceCharactersItem);
+        
+        this.updateStatusBarItemPair("save", this.saveItem);
+        this.updateStatusBarItemPair("saveAll", this.saveAllItem);
+        
+        this.updateStatusBarItemPair("back", this.backItem);
+        this.updateStatusBarItemPair("forward", this.forwardItem);
+        
+        this.updateStatusBarItemPair("undo", this.undoItem);
+        this.updateStatusBarItemPair("redo", this.redoItem);
+        
+        this.updateStatusBarItemPair("splitEditorDown", this.splitEditorDownItem);
+        
+        this.updateStatusBarItemPair("addCursorsToLineEnds", this.addCursorsToLineEndsItem);
+        this.updateStatusBarItemPair("toggleColumnSelectionMode", this.toggleColumnSelectionModeItem);
+        
+        this.updateStatusBarItemPair("run", this.runItem);
+        this.updateStatusBarItemPair("runWithDebug", this.runWithDebugItem);
     }
+
 
     // testing
     private toggleTerminalFunction = function() {
@@ -130,7 +290,6 @@ class ConfigurableShortcuts {
         let commandToExecute: ((...args: any[]) => any);
         if(typeof command == "string") {
             commandToExecute = () => {
-                vscode.window.showWarningMessage(command);
                 vscode.commands.executeCommand(command);
             }
         } else {
