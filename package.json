@@ -3,10 +3,11 @@
   "displayName": "VSCode Configurable Shortcuts",
   "description": "Various opt-in shortcuts for VSCode",
   "publisher": "nortakales",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "engines": {
     "vscode": "^1.53.0"
   },
+  "icon": "resources/icon.png",
   "repository": {
 		"type": "git",
 		"url": "https://github.com/nortakales/vscode-configurable-shortcuts"
