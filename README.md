@@ -2,13 +2,13 @@
 
 This is an extension that lets you configure some additional buttons in VSCode
 
-![](/resources/example.png)
+![](resources/example.png)
 
 ## Features
 
 Configure additional button in either the editor bar or the status bar (left or right).
 
-![](/resources/settings-example.gif)
+![](resources/settings-example.gif)
 
 List of currently supported buttons:
 
